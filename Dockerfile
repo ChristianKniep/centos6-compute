@@ -66,6 +66,7 @@ RUN yum install -y make automake gcc-c++ openmpi-devel opensm
 ### DON't USE THIS AT HOME (NOR IN PRODUCTION)
 RUN echo ">>> DON't USE THIS AT HOME (NOR IN PRODUCTION)"
 ADD etc/ssh /etc/ssh
+RUN chmod 600 /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_dsa_key
 
 # SLURM
 RUN yum install -y slurm
@@ -75,7 +76,7 @@ RUN sed -i -e 's/autostart=.*/autostart=true/' /etc/supervisord.d/slurmd.ini
 
 # MPI
 RUN echo "2014-09-25.2";yum clean --disablerepo=* --enablerepo=qnib-common all
-RUN yum install -y qnib-openmpi1541 qnib-openmpi154 qnib-openmpi165 qnib-openmpi175 qnib-openmpi182
+RUN yum install -y qnib-openmpi1541 qnib-openmpi154 qnib-openmpi164 qnib-openmpi175 qnib-openmpi182 qnib-openmpi183
 
 # SETUP env
 RUN useradd -u 5000 -d /usr/local/etc/ -M slurm
